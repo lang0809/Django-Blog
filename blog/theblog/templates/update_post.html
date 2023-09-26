@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Edit Blog Post!{% endblock %}
+{% block content %}
+
+
+{% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+
+        <h1>編輯文章</h1>
+        <br/><br/>
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+                <button class="btn btn-secondary">送出</button>
+        </div>
+    {% else %}
+        無法變更文章
+    {% endif %}
+{% else %}
+
+    登入後才可以操作
+
+{% endif %}
+
+
+
+{% endblock %}
